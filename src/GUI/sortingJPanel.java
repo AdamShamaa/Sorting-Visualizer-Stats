@@ -12,6 +12,7 @@ import sortAlgorithim.MergeSort;
 import sortAlgorithim.QuickSort;
 import sortAlgorithim.SelectionSort;
 import sortAlgorithim.ShellSort;
+import sortAlgorithim.MergeInsertionSort;
 
 public class sortingJPanel extends JPanel{
     Random rand =  new Random();
@@ -98,6 +99,11 @@ public class sortingJPanel extends JPanel{
         new ShellSort().sort(input);
         sortFinished();
     }
+    
+    public void runOptimizedMergeInsertionSort(sortingJPanel input) {
+        new MergeInsertionSort().sort(input);
+        sortFinished();
+    }
 
     private void sortFinished() {   
         deepResetArrayColor();
@@ -170,7 +176,11 @@ public class sortingJPanel extends JPanel{
 
     //External access to array used by the sorting algorithms
     public void switchVal(int i, int j) {
-        Comparable temp = a[i]; a[i] = a[j]; a[j] = (Integer) temp;
+        switchVal(a,i,j);
+    }
+    
+    public void switchVal(Comparable[] array, int i, int j) {
+        Comparable temp = array[i]; array[i] = array[j]; array[j] = (Integer) temp;
         setColor(i,255,0);
         setColor(j,255,0);
         repaint();
@@ -183,7 +193,7 @@ public class sortingJPanel extends JPanel{
 
     public void changeVal(Comparable[] array, int i, Comparable k) {
         incrementArrayAccessesCount();
-        a[i] = (Integer) k;
+        array[i] = (Integer) k;
         setColor(i,255,0);
         repaint();
         sleep(speed);
