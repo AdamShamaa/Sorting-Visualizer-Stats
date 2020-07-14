@@ -33,7 +33,7 @@ public class GUIJFrame extends javax.swing.JFrame {
         delayTextField = new javax.swing.JFormattedTextField();      
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(750, 400));
+        setMinimumSize(new java.awt.Dimension(800, 400));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -72,7 +72,7 @@ public class GUIJFrame extends javax.swing.JFrame {
             }
         });
 
-        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "InsertionSort", "MergeSort", "QuickSort", "SelectionSort", "ShellSort" }));
+        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "InsertionSort", "MergeSort", "QuickSort", "SelectionSort", "ShellSort", "MergeInsertion" }));
 
         shuffleButton.setText("Shuffle");
         shuffleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +132,7 @@ public class GUIJFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(controlPanelLayout.createSequentialGroup()
-                                        .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(controlPanelLayout.createSequentialGroup()
                                                         .addGap(6, 6, 6)
                                                         .addComponent(comparesJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,7 +154,7 @@ public class GUIJFrame extends javax.swing.JFrame {
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                         .addComponent(sizeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
+                                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, controlPanelLayout.createSequentialGroup() //
                                                                         .addGap(0, 0, Short.MAX_VALUE)
                                                                         .addComponent(arraySizeJLabel)
                                                                         .addGap(51, 51, 51)))
@@ -223,9 +223,9 @@ public class GUIJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()    
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                 );
         layout.setVerticalGroup(
@@ -235,6 +235,7 @@ public class GUIJFrame extends javax.swing.JFrame {
                         .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
+        
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
@@ -314,6 +315,7 @@ public class GUIJFrame extends javax.swing.JFrame {
                 else  if (w.sortType.equals("SelectionSort")) w.sortingJPanel.runSelectionSort(w.sortingJPanel);
                 else  if (w.sortType.equals("ShellSort")) w.sortingJPanel.runShellSort(w.sortingJPanel);
                 else  if (w.sortType.equals("QuickSort")) w.sortingJPanel.runQuickSort(w.sortingJPanel);
+                else  if (w.sortType.equals("MergeInsertion")) w.sortingJPanel.runOptimizedMergeInsertionSort(w.sortingJPanel);
                 w.isSorting = false;
             }
             w.validate();
