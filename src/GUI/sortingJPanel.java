@@ -8,12 +8,18 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 import sortAlgorithim.InsertionSort;
+import sortAlgorithim.KeyIndexedCounting;
 import sortAlgorithim.MergeSort;
 import sortAlgorithim.QuickSort;
 import sortAlgorithim.SelectionSort;
 import sortAlgorithim.ShellSort;
 import sortAlgorithim.MergeInsertionSort;
 
+/**
+ * 
+ * @author AdamShamaa
+ *
+ */
 public class sortingJPanel extends JPanel{
     Random rand =  new Random();
 
@@ -23,6 +29,7 @@ public class sortingJPanel extends JPanel{
     private int horizontalSize;
     private int verticalSize;
     private int BARSIZE; 
+    private Integer[] a;    
     private Integer[] copy; //copy of unsorted array - used to restart without re-shuffling 
 
     private ComparesJTextField ComparesJField;  //compares counter
@@ -30,7 +37,6 @@ public class sortingJPanel extends JPanel{
 
     private double speed;   //speed of sort
 
-    private Integer[] a;    
     private int[][] colorIndexRG;   //color values of each element in array
     private boolean[] permanentColor;   //used for algorithms which correctly place elements after each iteration  ex. quick-sort & selection-sort
 
@@ -44,6 +50,10 @@ public class sortingJPanel extends JPanel{
 
     public int arrayLength() {
         return a.length;
+    }
+    
+    public int range() {	//range of possible array values
+    	return verticalSize;
     }
 
     //Counters
@@ -102,6 +112,11 @@ public class sortingJPanel extends JPanel{
     
     public void runOptimizedMergeInsertionSort(sortingJPanel input) {
         new MergeInsertionSort().sort(input);
+        sortFinished();
+    }
+    
+    public void runKeyIndexedSort(sortingJPanel input) {
+        new KeyIndexedCounting().sort(input);
         sortFinished();
     }
 
