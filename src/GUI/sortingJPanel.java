@@ -13,6 +13,7 @@ import sortAlgorithim.MergeSort;
 import sortAlgorithim.QuickSort;
 import sortAlgorithim.SelectionSort;
 import sortAlgorithim.ShellSort;
+import sortAlgorithim.ThreeWayQuickSort;
 import sortAlgorithim.MergeInsertionSort;
 
 /**
@@ -119,6 +120,11 @@ public class sortingJPanel extends JPanel{
         new KeyIndexedCounting().sort(input);
         sortFinished();
     }
+    
+    public void runThreeWayQuickSort(sortingJPanel input) {
+        new ThreeWayQuickSort().sort(input);
+        sortFinished();
+    }
 
     private void sortFinished() {   
         deepResetArrayColor();
@@ -212,6 +218,11 @@ public class sortingJPanel extends JPanel{
         setColor(i,255,0);
         repaint();
         sleep(speed);
+    }
+    
+    public int compareTo(Comparable a, Comparable b) {
+    	ComparesJField.updateCount();
+    	return a.compareTo(b);
     }
 
     public boolean less(Comparable a, Comparable b) {

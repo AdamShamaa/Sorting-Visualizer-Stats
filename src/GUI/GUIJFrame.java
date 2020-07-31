@@ -72,7 +72,7 @@ public class GUIJFrame extends javax.swing.JFrame {
             }
         });
 
-        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "InsertionSort", "MergeSort", "QuickSort", "SelectionSort", "ShellSort", "MergeInsertion", "KeyIndexedCounting" }));
+        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "InsertionSort", "MergeSort", "QuickSort", "SelectionSort", "ShellSort", "MergeInsertion", "KeyIndexedCounting", "ThreeWayQuickSort" }));
 
         shuffleButton.setText("Shuffle");
         shuffleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -317,6 +317,7 @@ public class GUIJFrame extends javax.swing.JFrame {
                 else  if (w.sortType.equals("QuickSort")) w.sortingJPanel.runQuickSort(w.sortingJPanel);
                 else  if (w.sortType.equals("MergeInsertion")) w.sortingJPanel.runOptimizedMergeInsertionSort(w.sortingJPanel);
                 else  if (w.sortType.equals("KeyIndexedCounting")) w.sortingJPanel.runKeyIndexedSort(w.sortingJPanel);
+                else  if (w.sortType.equals("ThreeWayQuickSort")) w.sortingJPanel.runThreeWayQuickSort(w.sortingJPanel);
                 w.isSorting = false;
             }
             w.validate();
