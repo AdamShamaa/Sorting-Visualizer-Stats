@@ -1,5 +1,9 @@
 package GUI;
 
+import GUIComponents.ArrayAccessesJTextField;
+import GUIComponents.ArrayComparesJTextField;
+import GUIComponents.sortingJPanel;
+
 /**
  *@author AdamShamaa
  **/
@@ -28,8 +32,8 @@ public class GUIJFrame extends javax.swing.JFrame {
         
         sortingMethodComboBox = new javax.swing.JComboBox<>();
        
-        numOfComparesTextField = new ComparesJTextField();
-        numOfArrayAccessesTextField = new ArrayAccessesJTextField();
+        arrayComparesJTextField = new ArrayComparesJTextField();
+        arrayAccessesJTextField = new ArrayAccessesJTextField();
         delayTextField = new javax.swing.JFormattedTextField();      
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,7 +44,7 @@ public class GUIJFrame extends javax.swing.JFrame {
             }
         });
 
-        speedSlider.setMaximum(80);
+        speedSlider.setMaximum(150);
         speedSlider.setValue(20);
         speedSlider.setInverted(true);
         speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -116,13 +120,13 @@ public class GUIJFrame extends javax.swing.JFrame {
         delayTextField.setBorder(null);
         delayTextField.setText("0");
         
-        numOfComparesTextField.setBackground(new java.awt.Color(238, 238, 238));
-        numOfComparesTextField.setBorder(null);
-        numOfComparesTextField.setText("0");
+        arrayComparesJTextField.setBackground(new java.awt.Color(238, 238, 238));
+        arrayComparesJTextField.setBorder(null);
+        arrayComparesJTextField.setText("0");
 
-        numOfArrayAccessesTextField.setBackground(new java.awt.Color(238, 238, 238));
-        numOfArrayAccessesTextField.setBorder(null);
-        numOfArrayAccessesTextField.setText("0");
+        arrayAccessesJTextField.setBackground(new java.awt.Color(238, 238, 238));
+        arrayAccessesJTextField.setBorder(null);
+        arrayAccessesJTextField.setText("0");
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
@@ -137,11 +141,11 @@ public class GUIJFrame extends javax.swing.JFrame {
                                                         .addGap(6, 6, 6)
                                                         .addComponent(comparesJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(numOfComparesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(arrayComparesJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                         .addComponent(arrayAccessesJLabel)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(numOfArrayAccessesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(arrayAccessesJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(delayJLabel)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -210,9 +214,9 @@ public class GUIJFrame extends javax.swing.JFrame {
                                                 .addComponent(shuffleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(comparesJLabel)
-                                                        .addComponent(numOfComparesTextField)
+                                                        .addComponent(arrayComparesJTextField)
                                                         .addComponent(arrayAccessesJLabel)
-                                                        .addComponent(numOfArrayAccessesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(arrayAccessesJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(delayJLabel)
                                                         .addComponent(delayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
@@ -270,7 +274,7 @@ public class GUIJFrame extends javax.swing.JFrame {
     
     public void setDimensions() {
         sizeSlider.setMaximum(sortingJPanel.getWidth());
-        sortingJPanel.initialize(sortingJPanel.getWidth(), sortingJPanel.getHeight(), sizeSlider.getValue(), numOfComparesTextField, numOfArrayAccessesTextField); 
+        sortingJPanel.initialize(sortingJPanel.getWidth(), sortingJPanel.getHeight(), sizeSlider.getValue(), arrayComparesJTextField, arrayAccessesJTextField); 
     }
     
     private void restartSameSortPanel() {   //resets to the original unsorted array
@@ -334,8 +338,8 @@ public class GUIJFrame extends javax.swing.JFrame {
     private sortingJPanel sortingJPanel;  
     private javax.swing.JPanel controlPanel;
     private javax.swing.JFormattedTextField delayTextField;
-    private ArrayAccessesJTextField numOfArrayAccessesTextField;
-    private ComparesJTextField numOfComparesTextField;
+    private ArrayAccessesJTextField arrayAccessesJTextField;
+    private ArrayComparesJTextField arrayComparesJTextField;
     private javax.swing.JButton restartButton;
     private javax.swing.JButton shuffleButton;
     private javax.swing.JButton sortButton;

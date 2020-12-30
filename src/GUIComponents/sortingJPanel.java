@@ -1,4 +1,4 @@
-package GUI;
+package GUIComponents;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -33,19 +33,19 @@ public class sortingJPanel extends JPanel{
     private Integer[] a;    
     private Integer[] copy; //copy of unsorted array - used to restart without re-shuffling 
 
-    private ComparesJTextField ComparesJField;  //compares counter
-    private ArrayAccessesJTextField ArrayAccessesJField;    //accesses counter
+    private ArrayComparesJTextField ArrayComparesJTextField;  //compares counter
+    private ArrayAccessesJTextField ArrayAccessesJTextField;    //accesses counter
 
     private double speed;   //speed of sort
 
     private int[][] colorIndexRG;   //color values of each element in array
     private boolean[] permanentColor;   //used for algorithms which correctly place elements after each iteration  ex. quick-sort & selection-sort
 
-    public void initialize(int horizontalSize, int verticalSize, int numOfValues,ComparesJTextField ComparesJField, ArrayAccessesJTextField ArrayAccessesJField) {
+    public void initialize(int horizontalSize, int verticalSize, int numOfValues,ArrayComparesJTextField ArrayComparesJTextField, ArrayAccessesJTextField ArrayAccessesJField) {
         this.horizontalSize = horizontalSize;
         this.verticalSize = verticalSize;
-        this.ComparesJField = ComparesJField;
-        this.ArrayAccessesJField = ArrayAccessesJField;
+        this.ArrayComparesJTextField = ArrayComparesJTextField;
+        this.ArrayAccessesJTextField = ArrayAccessesJField;
         setSize(numOfValues);
     }
 
@@ -59,11 +59,11 @@ public class sortingJPanel extends JPanel{
 
     //Counters
     public void incrementComparesCount() {
-        ComparesJField.updateCount();
+    	ArrayComparesJTextField.updateCount();
     }
 
     public void incrementArrayAccessesCount() {
-        ArrayAccessesJField.updateCount();
+    	ArrayAccessesJTextField.updateCount();
     }
 
     public void incrementComparesCount(int i) {
@@ -79,9 +79,9 @@ public class sortingJPanel extends JPanel{
     }
 
     public void resetCounts() {
-        if (ComparesJField != null && ArrayAccessesJField != null) {
-            ComparesJField.reset();
-            ArrayAccessesJField.reset();
+        if (ArrayComparesJTextField != null && ArrayAccessesJTextField != null) {
+        	ArrayComparesJTextField.reset();
+        	ArrayAccessesJTextField.reset();
         }
     }
 
@@ -215,23 +215,25 @@ public class sortingJPanel extends JPanel{
     public void changeVal(Comparable[] array, int i, Comparable k) {
         incrementArrayAccessesCount();
         array[i] = (Integer) k;
-        setColor(i,255,0);
-        repaint();
-        sleep(speed);
+        if (array == a) {
+        	setColor(i,255,0);
+        	 repaint();
+             sleep(speed);
+        }
     }
     
     public int compareTo(Comparable a, Comparable b) {
-    	ComparesJField.updateCount();
+    	ArrayComparesJTextField.updateCount();
     	return a.compareTo(b);
     }
 
     public boolean less(Comparable a, Comparable b) {
-        ComparesJField.updateCount();
+    	ArrayComparesJTextField.updateCount();
         return a.compareTo(b) < 0;
     }
 
     public Comparable getValue(Comparable[] array, int i) {
-        ArrayAccessesJField.updateCount();
+    	ArrayAccessesJTextField.updateCount();
         return array[i];
     }
 
