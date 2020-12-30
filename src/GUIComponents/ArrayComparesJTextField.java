@@ -9,8 +9,8 @@ import javax.swing.JFormattedTextField;
 public class ArrayComparesJTextField extends JFormattedTextField{
     
 	private int numOfCompares;
-    
-    public void updateCount() { //increment the number of array accesses
+   
+    public void incrementCount() { //increment the number of array accesses
         this.setText(""+numOfCompares++);
     }
     

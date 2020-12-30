@@ -3,16 +3,21 @@ package GUI;
 import GUIComponents.ArrayAccessesJTextField;
 import GUIComponents.ArrayComparesJTextField;
 import GUIComponents.sortingJPanel;
+import sortAlgorithim.MasterSortingFile;
 
 /**
  *@author AdamShamaa
  **/
 public class GUIJFrame extends javax.swing.JFrame {
+	private MasterSortingFile sortingFile = new MasterSortingFile();	//used to retrieve the sorting algorithm names which are automatically inputed into the GUI
+	
     //Initialize JFrame
     public GUIJFrame() {
         initComponents();
     }
     private void initComponents() {
+    	/* Initialization */
+    	//JLabels
         applicationJLabel = new javax.swing.JLabel(); 
         comparesJLabel = new javax.swing.JLabel();
         arrayAccessesJLabel = new javax.swing.JLabel();
@@ -20,30 +25,32 @@ public class GUIJFrame extends javax.swing.JFrame {
         sortSpeedJLabel = new javax.swing.JLabel();
         delayJLabel = new javax.swing.JLabel();
         
+        //Panels
         controlPanel = new javax.swing.JPanel();
         sortingJPanel = new sortingJPanel();
         
+        //Buttons
         restartButton = new javax.swing.JButton();
         sortButton = new javax.swing.JButton();
         shuffleButton = new javax.swing.JButton();
         
+        //Sliders
         speedSlider = new javax.swing.JSlider();
         sizeSlider = new javax.swing.JSlider();
         
+        //ComboBox
         sortingMethodComboBox = new javax.swing.JComboBox<>();
        
+        //TextFields
         arrayComparesJTextField = new ArrayComparesJTextField();
         arrayAccessesJTextField = new ArrayAccessesJTextField();
         delayTextField = new javax.swing.JFormattedTextField();      
 
+        //Window Attributes
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 400));
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                formComponentResized(evt);
-            }
-        });
 
+        /*SET Slider Attributes*/
         speedSlider.setMaximum(150);
         speedSlider.setValue(20);
         speedSlider.setInverted(true);
@@ -62,6 +69,7 @@ public class GUIJFrame extends javax.swing.JFrame {
             }
         });
 
+        /*SET Button Attributes*/
         restartButton.setText("Restart");
         restartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,17 +84,20 @@ public class GUIJFrame extends javax.swing.JFrame {
             }
         });
 
-        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "InsertionSort", "MergeSort", "QuickSort", "SelectionSort", "ShellSort", "MergeInsertion", "KeyIndexedCounting", "ThreeWayQuickSort" }));
-
         shuffleButton.setText("Shuffle");
         shuffleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 shuffleButtonActionPerformed(evt);
             }
         });
+        
+        /*SET ComboBox Attributes*/
+        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(sortingFile.getArrayOfSortingAlgorithimNames()));
 
+        /*SET Control Panel Attributes*/
         controlPanel.setMaximumSize(new java.awt.Dimension(752, 490));
 
+        /*SET JPanel Attributes*/
         sortingJPanel.setPreferredSize(new java.awt.Dimension(0, 500));
         javax.swing.GroupLayout liveSortPanelLayout = new javax.swing.GroupLayout(sortingJPanel);
         sortingJPanel.setLayout(liveSortPanelLayout);
@@ -99,6 +110,7 @@ public class GUIJFrame extends javax.swing.JFrame {
                 .addGap(0, 391, Short.MAX_VALUE)
                 );
 
+        /*SET Label Attributes*/
         delayJLabel.setText("Delay:");
         
         arraySizeJLabel.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
@@ -116,6 +128,7 @@ public class GUIJFrame extends javax.swing.JFrame {
         applicationJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         applicationJLabel.setText("Sorting Visualizer");
 
+        /*SET Text Field Attributes*/
         delayTextField.setBackground(new java.awt.Color(238, 238, 238));
         delayTextField.setBorder(null);
         delayTextField.setText("0");
@@ -128,6 +141,7 @@ public class GUIJFrame extends javax.swing.JFrame {
         arrayAccessesJTextField.setBorder(null);
         arrayAccessesJTextField.setText("0");
 
+        /* Mount to JFrame (Automatically Done by NetBeans) */
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
@@ -244,10 +258,6 @@ public class GUIJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     //Action-Performed
-    private void formComponentResized(java.awt.event.ComponentEvent evt) {  //window resized - a larger window will allow more elements on the screen
-        setDimensions();   
-    }
-
     private void sortButtonActionPerformed(java.awt.event.ActionEvent evt) {   //sort button pressed
         startSort();
     }
@@ -272,18 +282,18 @@ public class GUIJFrame extends javax.swing.JFrame {
     private boolean isSorting;
     private String sortType;
     
-    public void setDimensions() {
+    public void initializeJPanel() {
         sizeSlider.setMaximum(sortingJPanel.getWidth());
-        sortingJPanel.initialize(sortingJPanel.getWidth(), sortingJPanel.getHeight(), sizeSlider.getValue(), arrayComparesJTextField, arrayAccessesJTextField); 
+        sortingJPanel.initialize(sizeSlider.getValue(), arrayComparesJTextField, arrayAccessesJTextField); 
     }
     
-    private void restartSameSortPanel() {   //resets to the original unsorted array
-        sortingJPanel.restartSameArray();   
+    private void restartSameSortPanel() {  	//reset the array to its initial values WITHOUT re-shuffling
+        sortingJPanel.array.restartSameArray();   
         initalizeSortPanel();
     }
     
-    private void initalizeSortPanel() { //re-initialize counters
-        sortingJPanel.resetCounts();
+    private void initalizeSortPanel() { //re-initialize counters to their default values (0)
+        sortingJPanel.resetJTextFieldCounts();
         sortingJPanel.repaint();
         sortingJPanel.validate();
     }
@@ -293,12 +303,12 @@ public class GUIJFrame extends javax.swing.JFrame {
         initalizeSortPanel();
     }
     
-    private void updateSortSpeed() {   //update delay
+    private void updateSortSpeed() {   //update the delay to the new value set by the slider
         sortingJPanel.setSpeed((speedSlider.getValue())*0.5);
         if (isSorting) delayTextField.setText(speedSlider.getValue() * 0.5 + " ms");
     }
     
-    private void startSort() {
+    private void startSort() {	//Initiate the sort sequence (see main function)
         sortType = sortingMethodComboBox.getSelectedItem().toString();
         isSorting = true;
     }
@@ -307,24 +317,16 @@ public class GUIJFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        GUIJFrame w = new GUIJFrame();
-        w.setVisible(true);
-        w.setDimensions();
+        GUIJFrame JFrame = new GUIJFrame();
+        JFrame.setVisible(true);
+        JFrame.initializeJPanel();
         while (true) {  //check if sort-button pressed
-            w.delayTextField.setText(w.speedSlider.getValue()*0.5 + " ms"); //update delay
-            if (w.isSorting == true) { 
-                //check which sort-type and run 
-                if (w.sortType.equals("InsertionSort")) w.sortingJPanel.runInsertionSort(w.sortingJPanel);
-                else  if (w.sortType.equals("MergeSort")) w.sortingJPanel.runMergeSort(w.sortingJPanel);
-                else  if (w.sortType.equals("SelectionSort")) w.sortingJPanel.runSelectionSort(w.sortingJPanel);
-                else  if (w.sortType.equals("ShellSort")) w.sortingJPanel.runShellSort(w.sortingJPanel);
-                else  if (w.sortType.equals("QuickSort")) w.sortingJPanel.runQuickSort(w.sortingJPanel);
-                else  if (w.sortType.equals("MergeInsertion")) w.sortingJPanel.runOptimizedMergeInsertionSort(w.sortingJPanel);
-                else  if (w.sortType.equals("KeyIndexedCounting")) w.sortingJPanel.runKeyIndexedSort(w.sortingJPanel);
-                else  if (w.sortType.equals("ThreeWayQuickSort")) w.sortingJPanel.runThreeWayQuickSort(w.sortingJPanel);
-                w.isSorting = false;
+            JFrame.delayTextField.setText(JFrame.speedSlider.getValue()*0.5 + " ms"); //update delay
+            if (JFrame.isSorting == true) { 
+                JFrame.sortingJPanel.startSort(JFrame.sortType);
+                JFrame.isSorting = false;
             }
-            w.validate();
+            JFrame.validate();
         }
     }
 

@@ -10,7 +10,7 @@ public class ArrayAccessesJTextField extends JFormattedTextField{
     
 	private int numOfArrayAccesses;
    
-    public void updateCount() { //increment the number of array accesses
+    public void incrementCount() { //increment the number of array accesses
         this.setText(""+numOfArrayAccesses++);
     }
 
