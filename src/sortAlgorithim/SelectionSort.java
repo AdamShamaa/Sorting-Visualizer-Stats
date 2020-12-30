@@ -1,19 +1,19 @@
 package sortAlgorithim;
 
-import GUI.sortingJPanel;
+import GUIComponents.Array;
 
-public class SelectionSort {
-    public void sort(sortingJPanel sort) {
-        int arrayLength = sort.arrayLength();
+public class SelectionSort extends SortingAlgorithim {
+    public void sort(Array array) {
+        int arrayLength = array.arrayLength();
         for (int i = 0; i < arrayLength; i++) {
             int indexMin = i;
             for (int j = i+1; j < arrayLength; j++) {
-               if(sort.less(sort.getValue(j),sort.getValue(indexMin))) indexMin = j;
+            	if(array.less(j, indexMin)) indexMin = j;
             }
-            sort.switchVal(i, indexMin);
-            sort.setColor(i, 99, 255);
-            sort.setPermanentColor(i, true);
-            sort.resetArrayColor();
+            array.switchVal(i, indexMin);
+            array.setRGB(99, 255, 0, i);
+            array.setPermanentColor(i, true);
+            array.shallowArrayColorReset();
         }   
     }
 }

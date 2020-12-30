@@ -1,35 +1,36 @@
 package sortAlgorithim;
 
-import GUI.sortingJPanel;
+import GUIComponents.Array;
 
-public class MergeSort {
+public class MergeSort extends SortingAlgorithim {
 
-    public void sort(sortingJPanel input) {
-        int arrayLength = input.arrayLength();
-        Comparable[] aux = new Comparable[arrayLength];
-        mergesort(input,aux,0,arrayLength-1);
+    public void sort(Array array) {
+        int arrayLength = array.arrayLength();
+        int[] aux = new int[arrayLength];
+        mergesort(array,aux,0,arrayLength-1);
     }
 
-    private void mergesort(sortingJPanel input, Comparable[] aux, int low, int hi) {
+    private void mergesort(Array array, int[] aux, int low, int hi) {
         if (low >= hi) return;
         int mid = low + (hi-low)/2;
-        mergesort(input,aux,low,mid);
-        mergesort(input,aux,mid+1,hi);
-        merge(input,aux,low,mid,hi); 
+        mergesort(array,aux,low,mid);
+        mergesort(array,aux,mid+1,hi);
+        merge(array,aux,low,mid,hi); 
     }
 
-    private void merge(sortingJPanel input, Comparable[] aux, int low, int mid ,int hi) {
+    private void merge(Array array, int[] aux, int low, int mid ,int hi) {
         int i = low;
         int j = mid + 1;
         for (int index = low; index <= hi; index++) {
-            input.changeVal(aux, index, input.getValue(index)); 
+            array.setVal(aux, index, array.getVal(index)); 
         }
         for (int index = low; index <= hi; index++) {
-            if (i > mid) input.changeVal(index, aux[j++]);
-            else if (j > hi) input.changeVal(index, aux[i++]);
-            else if (input.less(input.getValue(aux, i), input.getValue(aux, j))) input.changeVal(index, aux[i++]);
-            else input.changeVal(index, aux[j++]);
+            if (i > mid) array.setVal(index, aux[j++]);
+            else if (j > hi) array.setVal(index, aux[i++]);
+            else if (array.less(aux, i, j)) array.setVal(index, aux[i++]);
+            else array.setVal(index, aux[j++]);
+            array.shallowArrayColorReset();
         }
-        input.resetArrayColor();
+        array.shallowArrayColorReset();
     }
 }

@@ -1,37 +1,34 @@
 package sortAlgorithim;
 
-import GUI.sortingJPanel;
+import GUIComponents.Array;
 
-public class KeyIndexedCounting {
+public class KeyIndexedCounting extends SortingAlgorithim {
 
-	public void sort(sortingJPanel input) {
-		keyIndexedCounting(input, input.range());
+	public void sort(Array array) {
+		keyIndexedCounting(array, array.range());
 	}
 
-	private void keyIndexedCounting(sortingJPanel input, int radix) {
+	private void keyIndexedCounting(Array array, int radix) {
 		int count[] = new int[radix+1];
 		
-		int N = input.arrayLength();
-		Comparable<Integer>[] aux = (Comparable<Integer>[]) new Comparable[N];
+		int length = array.arrayLength();
+		int[] aux = new int[length];
 
-		for (int i = 0; i < N; i++) {	//frequency count
-			count[(int) input.getValue(i) + 1]++;
-			input.incrementArrayAccessesCount();
+		for (int i = 0; i < length; i++) {	//frequency count
+			array.setVal(count, array.getVal(i) + 1, array.getVal(i) + 1);
 		}
 
 		for (int r = 0; r < radix; r++) {	//convert frequency to indices
-			count[r+1] += count[r];
-			input.incrementArrayAccessesCount(2);
+			array.setVal(count, array.getVal(count, r + 1), array.getVal(count, r));
 		}
 
-		for (int i = 0; i < N; i++) {	//distribute to aux
-			aux[count[(int) input.getValue(i)]++] = input.getValue(i);
-			input.incrementArrayAccessesCount(2);
+		for (int i = 0; i < length; i++) {	//distribute to aux
+			array.setVal(aux, array.getVal(count, array.getVal(i)), array.getVal(i));
+			array.setVal(count, array.getVal(i), array.getVal(count, array.getVal(i) + 1));
 		}
 
-		for (int i = 0; i < N; i++) {	//copy to original array
-			input.changeVal(i, input.getValue(aux, i));
+		for (int i = 0; i < length; i++) {	//copy to original array
+			array.setVal(i, array.getVal(aux, i));
 		}
 	}
-
 }
