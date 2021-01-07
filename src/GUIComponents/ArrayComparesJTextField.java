@@ -2,19 +2,17 @@ package GUIComponents;
 
 import javax.swing.JFormattedTextField;
 
-/*
- * JTextField maintaining the number of array compares
- */
-
-public class ArrayComparesJTextField extends JFormattedTextField{
-    
+//	JTextField maintaining the number of array compares
+public class ArrayComparesJTextField extends JFormattedTextField {
 	private int numOfCompares;
-   
-    public void incrementCount() { //increment the number of array accesses
-        this.setText(""+numOfCompares++);
-    }
-    
-    public void reset() { //resets the number of array compares to its default (zero)
-        numOfCompares = 0;
-    }
+
+	//increment the number of array accesses
+	public void incrementCount() {
+		this.setText("" + numOfCompares++);
+	}
+
+	//resets the number of array compares to its default (zero)
+	public void reset() {
+		numOfCompares = 0;
+	}
 }
