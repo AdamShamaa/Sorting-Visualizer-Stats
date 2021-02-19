@@ -30,7 +30,7 @@ I'll briefly introduce the capabilities of this project, followed by a brief des
 
 #### Demo
 ![Sorting Visualizer Demo](https://user-images.githubusercontent.com/61364811/103180041-f71e8e80-485f-11eb-8100-f5244bf5324d.gif)
-
+Please note that the GIF is capped to ~11 FPS but forking the repository and running the application will allow the full > 30 FPS.
 
 #### Usage
 This application has two main components, the  _interface_ and the _sorting algorithim_.
